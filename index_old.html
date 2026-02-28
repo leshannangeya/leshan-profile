@@ -65,13 +65,13 @@
     }
 
     .nav-logo {
-      display: flex;
-      align-items: center;
+      font-family: var(--ff-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
       text-decoration: none;
-      opacity: 0.9;
-      transition: opacity 0.2s;
+      text-transform: uppercase;
     }
-    .nav-logo:hover { opacity: 1; }
 
     .nav-links {
       display: flex;
@@ -616,21 +616,7 @@
 
   <!-- NAV -->
   <nav>
-    <a href="/" class="nav-logo" title="Stephen Leshan Nang'eya — Product & Growth Analytics">
-      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Grid base -->
-        <rect x="1" y="1" width="34" height="34" rx="4" stroke="#c9a84c" stroke-width="0.75" stroke-opacity="0.3"/>
-        <!-- Bar chart bars -->
-        <rect x="6" y="22" width="4" height="8" fill="#c9a84c" opacity="0.35" rx="0.5"/>
-        <rect x="12" y="16" width="4" height="14" fill="#c9a84c" opacity="0.6" rx="0.5"/>
-        <rect x="18" y="11" width="4" height="19" fill="#c9a84c" opacity="0.85" rx="0.5"/>
-        <rect x="24" y="7" width="4" height="23" fill="#c9a84c" rx="0.5"/>
-        <!-- Trend line -->
-        <polyline points="8,21 14,15 20,10 26,6" stroke="#8bc4b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <!-- Trend dot -->
-        <circle cx="26" cy="6" r="1.75" fill="#8bc4b8"/>
-      </svg>
-    </a>
+    <a href="/" class="nav-logo">SLN</a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -721,7 +707,7 @@
         </div>
         <div class="meta-row">
           <span class="meta-key">Email</span>
-          <span class="meta-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="402e212e272539212c253328212e00272d21292c6e232f2d">[email&#160;protected]</a></span>
+          <span class="meta-val">nangeyaleshan@gmail.com</span>
         </div>
       </div>
     </div>
@@ -881,7 +867,7 @@
       <h2 class="contact-heading">Let's build<br>something <em>precise</em>.</h2>
       <p class="contact-sub">If you are hiring for Product Analytics, Product Strategy, or Growth Analytics roles, I'd like to connect.</p>
       <div class="contact-links">
-        <a href="/cdn-cgi/l/email-protection#cfa1aea1a8aab6aea3aabca7aea18fa8a2aea6a3e1aca0a2" class="contact-link">
+        <a href="mailto:nangeyaleshan@gmail.com" class="contact-link">
           <span class="cl-label">Email</span>
           <span class="cl-arrow">→</span>
         </a>
@@ -920,7 +906,7 @@
     <span class="footer-copy">Product &amp; Growth Analytics · leshannangeya.com</span>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     // Scroll-triggered fade-in
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry, i) => {
@@ -933,4 +919,13 @@
       });
     }, { threshold: 0.1 });
 
-    docume
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Staggered children within a fade-in parent
+    document.querySelectorAll('.exp-item, .edu-item').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 80}ms`;
+    });
+  </script>
+
+</body>
+</html>
