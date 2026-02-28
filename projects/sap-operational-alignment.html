@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAP Operational Alignment — Stephen Leshan Nang'eya</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=IBM+Plex+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #080809; --bg-2: #0e0e10; --bg-3: #141416;
+      --border: rgba(255,255,255,0.07);
+      --text: #e8e4dc; --muted: #7a7570;
+      --accent: #c9a84c; --accent-2: #8bc4b8; --white: #f5f2ec;
+      --ff-display: 'Cormorant Garamond', Georgia, serif;
+      --ff-mono: 'IBM Plex Mono', monospace;
+      --ff-body: 'DM Sans', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: var(--ff-body); font-size: 15px; line-height: 1.7; }
+    body::before {
+      content: ''; position: fixed; inset: 0;
+      background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px; pointer-events: none; z-index: 0;
+    }
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 3rem;
+      background: rgba(8,8,9,0.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; opacity: 0.9; transition: opacity 0.2s; }
+    .nav-logo:hover { opacity: 1; }
+    .nav-back { font-family: var(--ff-mono); font-size: 0.7rem; color: var(--muted); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-back:hover { color: var(--accent); }
+
+    .page { position: relative; z-index: 1; max-width: 860px; margin: 0 auto; padding: 8rem 2rem 6rem; }
+
+    .case-label { font-family: var(--ff-mono); font-size: 0.65rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.75rem; }
+    .case-label::before { content: ''; display: inline-block; width: 24px; height: 1px; background: var(--accent); }
+
+    h1 { font-family: var(--ff-display); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 300; color: var(--white); line-height: 1.1; margin-bottom: 1.5rem; }
+
+    .case-meta { display: flex; gap: 2.5rem; flex-wrap: wrap; margin-bottom: 3.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+    .meta-key { font-family: var(--ff-mono); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.3rem; }
+    .meta-val { font-family: var(--ff-display); font-size: 1rem; color: var(--text); }
+
+    .outcome-bar { display: flex; gap: 1px; background: var(--border); border: 1px solid var(--border); margin-bottom: 3.5rem; }
+    .outcome-item { flex: 1; background: var(--bg-2); padding: 1.5rem; }
+    .outcome-num { font-family: var(--ff-display); font-size: 2rem; font-weight: 300; color: var(--accent); line-height: 1; margin-bottom: 0.3rem; }
+    .outcome-label { font-family: var(--ff-mono); font-size: 0.6rem; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+
+    .case-body { display: flex; flex-direction: column; gap: 3rem; }
+    .case-section h2 { font-family: var(--ff-display); font-size: 1.5rem; font-weight: 400; color: var(--white); margin-bottom: 1rem; }
+    .case-section p { font-size: 0.92rem; color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+    .case-section p strong { color: var(--text); font-weight: 400; }
+
+    .divider { height: 1px; background: var(--border); }
+
+    .insight-list { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+    .insight-list li { font-size: 0.9rem; color: var(--muted); padding-left: 1.5rem; position: relative; line-height: 1.7; }
+    .insight-list li::before { content: '—'; position: absolute; left: 0; color: var(--accent); font-family: var(--ff-mono); }
+    .insight-list li strong { color: var(--text); font-weight: 400; }
+
+    .back-link { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--ff-mono); font-size: 0.68rem; color: var(--muted); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 3rem; transition: color 0.2s; }
+    .back-link:hover { color: var(--accent); }
+
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.5rem; }
+      .page { padding: 6rem 1.5rem 4rem; }
+      .outcome-bar { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="/" class="nav-logo">
+      <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="1" y="1" width="34" height="34" rx="4" stroke="#c9a84c" stroke-width="0.75" stroke-opacity="0.3"/>
+        <rect x="6" y="22" width="4" height="8" fill="#c9a84c" opacity="0.35" rx="0.5"/>
+        <rect x="12" y="16" width="4" height="14" fill="#c9a84c" opacity="0.6" rx="0.5"/>
+        <rect x="18" y="11" width="4" height="19" fill="#c9a84c" opacity="0.85" rx="0.5"/>
+        <rect x="24" y="7" width="4" height="23" fill="#c9a84c" rx="0.5"/>
+        <polyline points="8,21 14,15 20,10 26,6" stroke="#8bc4b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="26" cy="6" r="1.75" fill="#8bc4b8"/>
+      </svg>
+    </a>
+    <a href="/#projects" class="nav-back">← Back to Projects</a>
+  </nav>
+
+  <div class="page">
+    <div class="case-label">ERP &amp; Operations</div>
+    <h1>SAP Operational<br>Alignment</h1>
+
+    <div class="case-meta">
+      <div class="meta-item">
+        <div class="meta-key">Organisation</div>
+        <div class="meta-val">Standard Group PLC</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-key">Period</div>
+        <div class="meta-val">2011 – 2016</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-key">Role</div>
+        <div class="meta-val">IT Operations & Digital Strategy Lead</div>
+      </div>
+      <div class="meta-item">
+        <div class="meta-key">Tools</div>
+        <div class="meta-val">SAP ERP · Google Ad Manager · SQL</div>
+      </div>
+    </div>
+
+    <div class="outcome-bar">
+      <div class="outcome-item">
+        <div class="outcome-num">25%</div>
+        <div class="outcome-label">Financial Reporting Accuracy Improvement</div>
+      </div>
+      <div class="outcome-item">
+        <div class="outcome-num">30%</div>
+        <div class="outcome-label">Digital Operational Efficiency Gain</div>
+      </div>
+      <div class="outcome-item">
+        <div class="outcome-num">3</div>
+        <div class="outcome-label">Systems Integrated (SAP, Publishing, Ad Manager)</div>
+      </div>
+    </div>
+
+    <div class="case-body">
+
+      <div class="case-section">
+        <h2>The Problem</h2>
+        <p>Standard Group PLC operated across publishing and advertising with multiple disconnected systems. Financial reporting was manual, inconsistent, and slow — creating a significant lag between operational activity and the data available to decision-makers.</p>
+        <p>The publishing system, advertising operations, and financial reporting ran on separate workflows with no automated data flow between them. This created duplication, errors, and an inability to track revenue performance in real time.</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="case-section">
+        <h2>The Approach</h2>
+        <p>The work centred on deploying and configuring SAP ERP to serve as the operational backbone, then integrating it with the existing publishing and advertising systems to create a unified data environment.</p>
+        <ul class="insight-list">
+          <li><strong>SAP ERP deployment and optimisation</strong> — configured financial modules to match the organisation's reporting structure, improving accuracy and reducing manual reconciliation.</li>
+          <li><strong>Google Ad Manager integration</strong> — connected advertising revenue data directly into SAP, enabling automated revenue tracking across digital and print channels.</li>
+          <li><strong>Publishing system alignment</strong> — mapped publishing workflows into SAP operational outputs, creating a single source of truth for cross-functional reporting.</li>
+          <li><strong>Cross-functional collaboration</strong> — worked with finance, editorial, and advertising teams to align system outputs with business performance objectives.</li>
+        </ul>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="case-section">
+        <h2>Outcomes</h2>
+        <p>The integration of SAP with publishing and advertising systems eliminated the manual handoffs that were creating reporting delays and errors. <strong>Financial reporting accuracy improved by 25%</strong>, and <strong>digital operational efficiency increased by 30%</strong> through automated revenue tracking.</p>
+        <p>The organisation gained the ability to view advertising and publishing performance alongside financial data in a single operational layer — a significant shift from the fragmented view that had existed before.</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="case-section">
+        <h2>Key Learnings</h2>
+        <ul class="insight-list">
+          <li><strong>ERP value is realised through integration</strong>, not deployment — connecting SAP to existing systems created far more value than the system itself would have in isolation.</li>
+          <li>Cross-functional alignment is the hardest part of any systems project. <strong>Technical configuration is straightforward; getting teams to agree on definitions and workflows is not.</strong></li>
+          <li>Automating revenue tracking shifts the conversation from <strong>data collection to data interpretation</strong> — a more valuable use of analytical capacity.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <a href="/#projects" class="back-link">← Back to all projects</a>
+  </div>
+</body>
+</html>
