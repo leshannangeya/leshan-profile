@@ -601,6 +601,39 @@
     
 
 
+
+    /* ── MOBILE MENU OVERLAY ── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #080809;
+      z-index: 99999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+      padding: 0;
+    }
+    .mobile-links a {
+      font-family: var(--ff-mono);
+      font-size: 0.9rem;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .mobile-links a:hover { color: var(--accent); }
+
     /* ── HAMBURGER ── */
     .hamburger {
       display: none;
@@ -664,21 +697,29 @@
 <body>
 
   <!-- NAV -->
+  <!-- Mobile menu overlay (outside nav) -->
+  <div class="mobile-menu" id="mobile-menu">
+    <ul class="mobile-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://blog.leshannangeya.com" target="_blank">Blog ↗</a></li>
+      <li><a href="/resume.pdf">Resume ↗</a></li>
+    </ul>
+  </div>
+
   <nav>
     <a href="/" class="nav-logo" title="Stephen Leshan Nang'eya — Product & Growth Analytics">
       <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Grid base -->
         <rect x="1" y="1" width="34" height="34" rx="4" stroke="#c9a84c" stroke-width="0.75" stroke-opacity="0.3"/>
-        <!-- Bar chart bars -->
         <rect x="6" y="22" width="4" height="8" fill="#c9a84c" opacity="0.35" rx="0.5"/>
         <rect x="12" y="16" width="4" height="14" fill="#c9a84c" opacity="0.6" rx="0.5"/>
         <rect x="18" y="11" width="4" height="19" fill="#c9a84c" opacity="0.85" rx="0.5"/>
         <rect x="24" y="7" width="4" height="23" fill="#c9a84c" rx="0.5"/>
-        <!-- Trend line -->
-        <!-- Trend dot -->
       </svg>
     </a>
-    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -688,6 +729,7 @@
       <li><a href="https://blog.leshannangeya.com" target="_blank">Blog ↗</a></li>
       <li><a href="/resume.pdf">Resume ↗</a></li>
     </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   </nav>
 
   <!-- HERO -->
@@ -1017,17 +1059,21 @@
   
 
 
+  
+
   <script>
-    var hamburger = document.getElementById('hamburger');
-    var navLinks  = document.querySelector('.nav-links');
-    hamburger.addEventListener('click', function() {
-      hamburger.classList.toggle('is-open');
-      navLinks.classList.toggle('open');
+    var btn  = document.getElementById('hamburger');
+    var menu = document.getElementById('mobile-menu');
+    btn.addEventListener('click', function() {
+      btn.classList.toggle('is-open');
+      menu.classList.toggle('open');
+      document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
     });
-    navLinks.querySelectorAll('a').forEach(function(a) {
+    document.querySelectorAll('.mobile-links a').forEach(function(a) {
       a.addEventListener('click', function() {
-        hamburger.classList.remove('is-open');
-        navLinks.classList.remove('open');
+        btn.classList.remove('is-open');
+        menu.classList.remove('open');
+        document.body.style.overflow = '';
       });
     });
   </script>
