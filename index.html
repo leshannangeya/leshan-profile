@@ -55,7 +55,7 @@
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 10000;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -592,45 +592,58 @@
     }
 
     /* ── RESPONSIVE ── */
+    
+    
+    
+    
+    
+    
+    
+
+
     /* ── HAMBURGER ── */
     .hamburger {
       display: none;
       flex-direction: column;
+      justify-content: center;
       gap: 5px;
-      cursor: pointer;
-      padding: 4px;
       background: none;
       border: none;
-      z-index: 200;
+      cursor: pointer;
+      padding: 8px;
+      position: relative;
+      z-index: 99999;
     }
     .hamburger span {
       display: block;
-      width: 24px;
-      height: 1.5px;
+      width: 22px;
+      height: 2px;
       background: var(--text);
-      transition: all 0.3s ease;
+      border-radius: 2px;
+      transition: all 0.25s ease;
       transform-origin: center;
     }
-    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .hamburger.open span:nth-child(2) { opacity: 0; }
-    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+    .hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.is-open span:nth-child(2) { opacity: 0; }
+    .hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     @media (max-width: 900px) {
       nav { padding: 1rem 1.5rem; }
       .hamburger { display: flex; }
       .nav-links {
-        display: none;
+        display: none !important;
         position: fixed;
         top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(8,8,9,0.97);
+        background: #080809;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         gap: 2.5rem;
-        z-index: 150;
+        z-index: 9999;
       }
-      .nav-links.open { display: flex; }
-      .nav-links a { font-size: 1rem; letter-spacing: 0.15em; }
+      .nav-links.open { display: flex !important; }
+      
+      .nav-links a { font-size: 1.1rem; letter-spacing: 0.15em; }
       .hero {
         grid-template-columns: 1fr;
         padding: 6rem 1.5rem 3rem;
@@ -665,10 +678,8 @@
         <!-- Trend dot -->
       </svg>
     </a>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links" id="nav-links">
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#experience">Experience</a></li>
@@ -1003,6 +1014,22 @@
     <span class="footer-copy">Product &amp; Growth Analytics · leshannangeya.com</span>
   </footer>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-    // Scroll-triggered fade-in
-    const observer = new IntersectionObserver((entries) 
+  
+
+
+  <script>
+    var hamburger = document.getElementById('hamburger');
+    var navLinks  = document.querySelector('.nav-links');
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('is-open');
+      navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        hamburger.classList.remove('is-open');
+        navLinks.classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>
