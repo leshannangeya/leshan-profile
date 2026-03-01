@@ -581,6 +581,48 @@
       letter-spacing: 0.08em;
     }
 
+
+    /* ── DASHBOARDS ── */
+    #dashboards { background: var(--bg-2); }
+    .dashboard-card {
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .dashboard-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .dashboard-title {
+      font-family: var(--ff-display);
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: var(--white);
+    }
+    .dashboard-tag {
+      font-family: var(--ff-mono);
+      font-size: 0.62rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    .tableau-embed {
+      width: 100%;
+      overflow: hidden;
+      background: #0e0e10;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .tableau-embed iframe,
+    .tableau-embed object {
+      width: 100% !important;
+      border: none;
+    }
+
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(24px); }
@@ -704,6 +746,8 @@
       <li><a href="#skills">Skills</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#dashboards">Dashboards</a></li>
+      <li><a href="#dashboards">Dashboards</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="https://blog.leshannangeya.com" target="_blank">Blog ↗</a></li>
       <li><a href="/resume.pdf">Resume ↗</a></li>
@@ -725,6 +769,8 @@
       <li><a href="#skills">Skills</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#projects">Projects</a></li>
+      <li><a href="#dashboards">Dashboards</a></li>
+      <li><a href="#dashboards">Dashboards</a></li>
       <li><a href="#contact">Contact</a></li>
       <li><a href="https://blog.leshannangeya.com" target="_blank">Blog ↗</a></li>
       <li><a href="/resume.pdf">Resume ↗</a></li>
@@ -1037,6 +1083,51 @@
       </div>
 
     </div>
+  </section>
+
+
+  <!-- DASHBOARDS -->
+  <section id="dashboards">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2 class="section-title">Live Dashboards</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="dashboard-card fade-in">
+      <div class="dashboard-meta">
+        <div class="dashboard-title">Paul Bistre — Portfolio Analytics Dashboard</div>
+        <div class="dashboard-tag">Tableau Public</div>
+      </div>
+      <div class="tableau-embed">
+        <div class='tableauPlaceholder' style='width:100%;min-height:500px;'>
+          <object class='tableauViz' style='width:100%;min-height:500px;'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+            <param name='embed_code_version' value='3' />
+            <param name='site_root' value='' />
+            <param name='name' value='PaulBistre_17640194254460/PaulBistrePortfolioAnalyticsDashboard' />
+            <param name='tabs' value='no' />
+            <param name='toolbar' value='yes' />
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='language' value='en-US' />
+          </object>
+        </div>
+        <script type='text/javascript'>
+          var divElement = document.querySelector('.tableauPlaceholder');
+          var vizElement = divElement.querySelector('object');
+          vizElement.style.width='100%';
+          vizElement.style.height='500px';
+          var scriptElement = document.createElement('script');
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          divElement.parentNode.insertBefore(scriptElement, divElement);
+        </script>
+      </div>
+    </div>
+
   </section>
 
   <!-- CONTACT -->
